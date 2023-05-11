@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="WARN" name="LoggingConfig">
+    <Properties>
+        <Property name="layout" value="%d{yyyy-MM-dd HH:mm:ss} -${sys:user.name}- [%t] %p %c - %m%n"/>
+        <Property name="path">\tmp\</Property>
+        <Property name="infoLog">${path}info.log</Property>
+        <Property name="errorLog">${path}error.log</Property>
+        <Property name="tmpInfoLog">${path}info-history.log.gz</Property>
+        <Property name="tmpErrorLog">${path}error-history.log.gz</Property>
+        <Property name="fileSize">5 MB</Property>
+        <Property name="amountOfTmpFiles">1</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}"/>
+        </Console>
+
+        <RollingFile name="InfoLog" fileName="${infoLog}" append="true"
+                     filePattern="${tmpInfoLog}">
+            <PatternLayout pattern="${layout}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${fileSize}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${amountOfTmpFiles}"/>
+        </RollingFile>
+
+        <RollingFile name="ErrorLog" fileName="${errorLog}" append="true"
+                     filePattern="${tmpErrorLog}">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${layout}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${fileSize}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${amountOfTmpFiles}"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="Console" level="info"/>
+            <AppenderRef ref="ErrorLog" level="error"/>
+            <AppenderRef ref="InfoLog" level="info"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "price": 199.99,
+    "description": "Klapprad Compact black"
+  },
+  {
+    "id": 2,
+    "price": 638.99,
+    "description": "Hybrid Pro Trekking-bike"
+  },
+  {
+    "id": 3,
+    "price": 559.99,
+    "description": "City-Bike Supreme"
+  },
+  {
+    "id": 4,
+    "price": 249.99,
+    "description": "Kinder Mountainbike"
+  },
+  {
+    "id": 5,
+    "price": 2229.99,
+    "description": "E-Bike All-road"
+  }
+]
